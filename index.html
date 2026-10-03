@@ -177,9 +177,9 @@ h1 .w>span{display:inline-block;transform:translateY(110%);animation:up .8s cubi
 </nav>
   <header class="hero" id="top"><div class="status" id="status"><i></i><span></span></div><h1 id="tagline"></h1><p id="intro"></p><div class="cta-row"><a class="btn" href="#work">See my work</a><a class="btn ghost" href="#contact">Get in touch</a></div></header>
   <div class="stats" id="stats"></div>
-  <section id="work"><h2>Selected work</h2>
-    <div class="tabs" id="tabs"></div><div class="grid" id="grid"></div></section>
-  <section id="about"><h2>About me</h2><div class="about"><div class="photo" id="photo"></div><div><div id="bio"></div><div class="facts" id="facts"></div></div></div></section>
+  <section id="work"><h2>My Previous Works</h2>
+   <div class="grid" id="grid"></div></section>
+  <section id="about"><h2>About BlueMedia</h2><div class="about"><div class="photo" id="photo"></div><div><div id="bio"></div><div class="facts" id="facts"></div></div></div></section>
   <section id="creators" hidden>
   <h2>Creators I've worked with</h2>
   <div class="creators" id="creatorList"></div>
@@ -195,14 +195,15 @@ h1 .w>span{display:inline-block;transform:translateY(110%);animation:up .8s cubi
 const SITE_THEME = "blue";   // "blue" = blue & white  |  "gold" = black & gold
 const SITE = {
   name: "BlueMedia Edits",
-  tagline: "Long-form editing for gaming creators.",
-  intro: "I edit gaming videos that keep viewers watching, and I do it to help creators grow, not only to earn.",
+  tagline: "Gaming content production for creators.",
+  intro: "I represent a small team of gaming editors focused on creating engaging, high-retention content for creators.",
   status: "Open for new projects",  // leave "" to hide
   stats: [],  // optional real numbers, e.g. [["12M+","Views on edited videos"],["40+","Videos delivered"]]
   photo: "photo.jpg",  // e.g. "photo.jpg" (put the file next to index.html). Leave empty for a placeholder.
   bio: [
-    "I'm the editor behind BlueMedia Edits, focused on long-form gaming content for YouTube creators.",
-  "I focus on pacing, storytelling, sound design and visual clarity to turn raw gameplay into videos that keep viewers watching.",
+    "I'm the representative behind BlueMedia Edits, a small team focused on gaming content production.",
+  "I handle the frontend and client-facing side of projects, including communication, project coordination, presentation and delivery.",
+  "Our team works together to create engaging gaming videos with strong pacing, storytelling, sound design and visual polish.",
   "I work in IST (GMT+5:30)."
   ],
   facts: [ ["Gaming","Specialist"],
@@ -222,8 +223,8 @@ const SITE = {
   ],
   process: [
     { title:"Share your project", text:"Send the raw footage, a reference video and your deadline." },
-    { title:"I edit the first cut", text:"I cut for pacing, add music, sound and graphics in your channel's style." },
-    { title:"Review and deliver", text:"You send feedback, I fix it, and you get the final file ready to upload." }
+    { title:"Our team handles the edit", text:"Our editors work on pacing, music, sound design and graphics according to your channel's style" },
+    { title:"Review and deliver", text:"You send feedback, I coordinate the revisions with the team, and we deliver the final file ready to upload." }
   ],
   services: [
     { title:"Long-form gaming editing", price:"$100–150 per video", text:"Full edits for gaming YouTube videos: cuts, pacing, music, sound and graphics. The price depends on video length, size and the effort involved." },
@@ -304,16 +305,6 @@ const cats = ["All", ...new Set(SITE.videos.map(v => v.cat))];
 const count = c => c === "All" ? SITE.videos.length : SITE.videos.filter(v => v.cat === c).length;
 const items = SITE.videos.map(buildItem);
 items.forEach(i => $("grid").append(i));
-if (cats.length > 2){
-  $("tabs").innerHTML = cats.map((c,i) => `<button aria-pressed="${i===0}" data-c="${esc(c)}">${esc(c)}<span class="n">${count(c)}</span></button>`).join("");
-  $("tabs").onclick = e => {
-    const b = e.target.closest("button"); if (!b) return;
-    $("tabs").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
-    stopOthers(null);
-    items.forEach(i => i.hidden = b.dataset.c !== "All" && i.dataset.cat !== b.dataset.c);
-    $("grid").classList.toggle("shorts", b.dataset.c === "Shorts");
-  };
-}
 
 /* ---------- Motion ---------- */
 const prog = $("prog");
