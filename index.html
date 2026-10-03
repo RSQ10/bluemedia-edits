@@ -260,11 +260,13 @@ $("creatorList").innerHTML = SITE.creators.map(c => {
   return c.link ? `<a class="creator" href="${esc(c.link)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="creator">${inner}</div>`;
 }).join("");
 $("serviceList").innerHTML = SITE.services.map(s => `
-  <a class="service" href="https://x.com/bluemediaedits" target="_blank" rel="noopener">
+  <div class="service">
     <h3>${esc(s.title)}</h3>
-    <div class="price">${esc(s.price)}</div>
+    <a class="price" href="https://x.com/bluemediaedits" target="_blank" rel="noopener">
+      ${esc(s.price)}
+    </a>
     <p>${esc(s.text)}</p>
-  </a>
+  </div>
 `).join("");
 $("serviceNote").textContent = SITE.serviceNote;
 $("ctaTitle").textContent = SITE.contact.title;
