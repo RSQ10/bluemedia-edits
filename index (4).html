@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BlueMedia Edits — Gaming Video Editor</title>
+<meta name="description" content="Long-form video editing for gaming creators. Based in India (IST).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F8FF;--ink:#0B1B3A;--mute:#3F4D6B;--line:#D9E3F5;--card:#FFFFFF;--accent:#1F5BFF;--onink:#FFFFFF;
+--head:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;--body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif}
+:root[data-theme=gold]{--bg:#0B0B0C;--ink:#F3EEE0;--mute:#C2BBA6;--line:#2A2823;--card:#151412;--accent:#D4AF37;--onink:#0B0B0C}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 18px/1.7 var(--body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:16px 0;position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+nav .hire{padding:9px 20px;background:var(--accent);color:var(--onink)!important;border-radius:999px;font-weight:600}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:500;color:var(--mute);border:1px solid var(--line);background:var(--card);padding:6px 14px;border-radius:999px;margin-bottom:24px}
+.status i{width:8px;height:8px;border-radius:50%;background:#22C55E}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--accent)}
+.stats{display:flex;gap:48px;flex-wrap:wrap;padding:8px 0 24px}
+.stats b{display:block;font:800 clamp(28px,4vw,40px) var(--head)}.stats span{font-size:15px;color:var(--mute)}
+.tabs .n{opacity:.65;margin-left:6px;font-weight:500}
+.grid.shorts{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.player.v{aspect-ratio:9/16}
+.quote{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;grid-column:1/-1;max-width:720px}
+.quote p{color:var(--ink);font-size:18px}.quote cite{display:block;margin-top:10px;font-style:normal;color:var(--mute);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;counter-reset:s}
+.step{border-top:2px solid var(--accent);padding-top:16px;counter-increment:s}
+.step h3{font:700 19px var(--head)}.step h3::before{content:counter(s) ". "}
+.step p{color:var(--mute);font-size:16px;margin-top:6px;line-height:1.6}
+nav .logo{font:800 21px var(--head);text-decoration:none}
+nav ul{display:flex;gap:28px;list-style:none;padding:0}
+nav ul a{text-decoration:none;color:var(--mute);font-weight:500;font-size:16px;transition:color .2s}
+nav ul a:hover{color:var(--ink)}
+.hero{padding:72px 0 56px;max-width:760px}
+h1{font:800 clamp(38px,6.5vw,68px)/1.1 var(--head);letter-spacing:-.02em}
+.hero .cta-row{margin-top:32px}.hero p{margin-top:24px;color:var(--mute);font-size:20px;line-height:1.6;max-width:580px}
+.btn{display:inline-block;padding:15px 28px;background:var(--accent);color:var(--onink);border-radius:999px;text-decoration:none;font-weight:600;font-size:16px;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+section{padding:64px 0}
+h2{font:800 clamp(28px,4vw,38px)/1.2 var(--head);letter-spacing:-.015em;margin-bottom:28px}
+.tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.tabs button{font:600 15px var(--body);padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--mute);cursor:pointer;transition:.2s}
+.tabs button[aria-pressed=true]{background:var(--accent);color:var(--onink);border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:28px}
+.item h3{font:700 18px var(--head);margin-top:14px}
+.item p{color:var(--mute);font-size:16px;line-height:1.6}
+.player{position:relative;aspect-ratio:16/9;background:#000;border-radius:14px;overflow:hidden}
+.player video,.player iframe,.player .poster{position:absolute;inset:0;width:100%;height:100%;border:0;object-fit:cover}
+.poster{background:none;padding:0;border:0;cursor:pointer;display:block}
+.poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s,opacity .3s}
+.poster:hover img{transform:scale(1.03);opacity:.9}
+.play{position:absolute;left:50%;top:50%;width:62px;height:62px;margin:-31px;border-radius:50%;background:rgba(255,255,255,.94);display:grid;place-items:center;transition:transform .2s}
+.poster:hover .play{transform:scale(1.08)}
+.play::after{content:"";margin-left:4px;border-left:16px solid #14171A;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.badge{position:absolute;left:12px;top:12px;font:500 12px var(--body);background:rgba(0,0,0,.55);color:#fff;padding:4px 10px;border-radius:999px;pointer-events:none}
+.about{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+.about .photo{aspect-ratio:4/5;border-radius:14px;background:var(--line) center/cover;display:grid;place-items:center;color:var(--mute);font-size:14px}
+.about p+p{margin-top:16px}.about p{color:var(--mute);max-width:620px}
+.facts{display:flex;gap:40px;margin-top:28px;flex-wrap:wrap}
+.facts b{display:block;font:800 28px var(--head);color:var(--ink)}.facts span{font-size:15px;color:var(--mute)}
+.creators{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.creator{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;gap:14px;align-items:center;text-decoration:none;transition:border-color .2s}
+a.creator:hover{border-color:var(--accent)}
+.creator .av{width:46px;height:46px;border-radius:50%;background:var(--line) center/cover;flex:none;display:grid;place-items:center;font:700 16px var(--head);color:var(--mute)}
+.creator b{display:block;font-weight:600;line-height:1.3}.creator small{color:var(--mute);font-size:14px}
+.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.service{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px}
+.service h3{font:700 21px var(--head)}.service .price{color:var(--accent);font-weight:600;margin:6px 0 12px}
+.service p{color:var(--mute);font-size:16px;line-height:1.65}
+.note{margin-top:24px;color:var(--mute);font-size:16px}
+.contact{text-align:center;padding:96px 0 72px}
+.contact h2{margin-bottom:12px}.contact p{color:var(--mute)}
+.links{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.links a{padding:12px 22px;border:1px solid var(--line);border-radius:999px;text-decoration:none;font-weight:600;font-size:16px;transition:.2s}
+.links a:first-child{background:var(--accent);color:var(--onink);border-color:var(--accent)}
+.links a:hover{border-color:var(--accent)}
+footer{padding:24px 0 40px;color:var(--mute);font-size:15px;border-top:1px solid var(--line)}
+@media(max-width:720px){.about{grid-template-columns:1fr;gap:24px}.about .photo{max-width:200px}nav ul{gap:16px}.hero{padding-top:40px}}
+/* ---- Motion: one hero sequence + scroll progress + video cards rising in ---- */
+body{overflow-x:clip}
+#prog{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;z-index:20}
+.hero{position:relative}
+.hero::before{content:"";position:absolute;z-index:-1;right:-140px;top:-30px;width:440px;height:440px;border-radius:50%;pointer-events:none;
+background:radial-gradient(circle,color-mix(in srgb,var(--accent) 32%,transparent),transparent 66%);animation:drift 14s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(-70px,50px) scale(1.15)}}
+h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.12em;margin-bottom:-.12em}
+h1 .w>span{display:inline-block;transform:translateY(110%);animation:up .8s cubic-bezier(.2,.75,.2,1) forwards;animation-delay:calc(var(--i)*80ms + 150ms)}
+@keyframes up{to{transform:none}}
+.status,.hero p,.hero .cta-row{opacity:0;animation:fade .7s ease forwards}
+.status{animation-delay:.05s}.hero p{animation-delay:.75s}.hero .cta-row{animation-delay:.95s}
+@keyframes fade{to{opacity:1}}
+.item.rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.75,.2,1);transition-delay:calc(var(--d,0)*90ms)}
+.item.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}
+.status,.hero p,.hero .cta-row{opacity:1}h1 .w>span{transform:none}.item.rv{opacity:1;transform:none}.hero::before{display:none}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div class="wrap">
+  <nav><a class="logo" href="#top" id="logo"></a>
+    <ul><li><a href="#work">Work</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#process">Process</a></li><li><a class="hire" href="#contact">Hire me</a></li></ul>
+  </nav>
+  <header class="hero" id="top"><div class="status" id="status"><i></i><span></span></div><h1 id="tagline"></h1><p id="intro"></p><div class="cta-row"><a class="btn" href="#work">See my work</a><a class="btn ghost" href="#contact">Get in touch</a></div></header>
+  <div class="stats" id="stats"></div>
+  <section id="work"><h2>Selected work</h2>
+    <div class="tabs" id="tabs"></div><div class="grid" id="grid"></div></section>
+  <section id="about"><h2>About me</h2><div class="about"><div class="photo" id="photo"></div><div><div id="bio"></div><div class="facts" id="facts"></div></div></div></section>
+  <section id="creators"><h2>Creators I've worked with</h2><div class="creators" id="creatorList"></div></section>
+  <section id="process"><h2>How we'll work together</h2><div class="steps" id="stepList"></div></section>
+  <section id="services"><h2>What I offer</h2><div class="services" id="serviceList"></div><p class="note" id="serviceNote"></p></section>
+  <section class="contact" id="contact"><h2 id="ctaTitle"></h2><p id="ctaText"></p><div class="links" id="links"></div></section>
+  <footer id="footer"></footer>
+</div>
+
+<script>
+/* ============ EDIT YOUR CONTENT HERE ============ */
+const SITE_THEME = "blue";   // "blue" = blue & white  |  "gold" = black & gold
+const SITE = {
+  name: "BlueMedia Edits",
+  tagline: "Long-form editing for gaming creators.",
+  intro: "I edit gaming videos that keep viewers watching, and I do it to help creators grow, not only to earn.",
+  status: "Open for new projects",  // leave "" to hide
+  stats: [],  // optional real numbers, e.g. [["12M+","Views on edited videos"],["40+","Videos delivered"]]
+  photo: "",  // e.g. "photo.jpg" (put the file next to index.html). Leave empty for a placeholder.
+  bio: [
+    "I'm the editor behind BlueMedia Edits, with 3+ years of experience cutting long-form videos for gaming creators.",
+    "I don't edit only to earn. I want to help other creators grow, so I put the same care into every video: tight pacing, clean cuts and a style that matches your channel.",
+    "I work in IST (GMT+5:30)."
+  ],
+  facts: [["3+","Years editing"],["Long-form","Gaming specialist"],["IST","Time zone"]],
+  videos: [
+    // type "file": put the mp4 in the /videos folder. "poster" is optional (an image path).
+    { type:"file", src:"videos/intro-1.mp4", poster:"", title:"Channel intro 1", desc:"Intro edited for a gaming creator.", cat:"Intros" },
+    { type:"file", src:"videos/intro-2.mp4", poster:"", title:"Channel intro 2", desc:"Intro edited for a gaming creator.", cat:"Intros" },
+    { type:"file", src:"videos/intro-3.mp4", poster:"", title:"Channel intro 3", desc:"Intro edited for a gaming creator.", cat:"Intros" },
+    // Add  vertical:true  and  cat:"Shorts"  for YouTube Shorts (shown in 9:16).
+    // type "youtube": paste the full link or just the video ID.
+    { type:"youtube", url:"https://www.youtube.com/watch?v=dQw4w9WgXcQ", title:"Long-form gaming edit 1", desc:"Full video edit. Replace with your link.", cat:"Long-form" },
+    { type:"youtube", url:"https://youtu.be/dQw4w9WgXcQ", title:"Long-form gaming edit 2", desc:"Full video edit. Replace with your link.", cat:"Long-form" }
+  ],
+  creators: [
+    // link and image are optional
+    { name:"Creator A", detail:"Gaming channel", link:"", image:"", quote:"", role:"" },
+    { name:"Creator B", detail:"Gaming channel", link:"", image:"" },
+    { name:"Creator C", detail:"Gaming channel", link:"", image:"" }
+  ],
+  process: [
+    { title:"Share your project", text:"Send the raw footage, a reference video and your deadline." },
+    { title:"I edit the first cut", text:"I cut for pacing, add music, sound and graphics in your channel's style." },
+    { title:"Review and deliver", text:"You send feedback, I fix it, and you get the final file ready to upload." }
+  ],
+  services: [
+    { title:"Long-form gaming editing", price:"$100–150 per video", text:"Full edits for gaming YouTube videos: cuts, pacing, music, sound and graphics. The price depends on video length, size and the effort involved." },
+    { title:"Channel intros", price:"Quote on request", text:"Short branded openers for your channel, made to match your style." }
+  ],
+  serviceNote: "My standard rate is $100–150 per video and it's negotiable. Message me with your project and we'll agree on a price that works.",
+  contact: { title:"Let's grow your channel", text:"Send me your project details on X or email and I'll get back to you.",
+    links:[["Email me","mailto:yorrichijr@gmail.com"],["@bluemediaedits on X","https://x.com/bluemediaedits"]] }
+};
+/* ================================================= */
+
+document.documentElement.dataset.theme = SITE_THEME;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+document.title = SITE.name + " — Video Editor";
+$("logo").textContent = SITE.name;
+$("tagline").innerHTML = SITE.tagline.split(" ").map((w,i) => `<span class="w"><span style="--i:${i}">${esc(w)}</span></span>`).join(" ");
+if (SITE.status) $("status").lastChild.textContent = SITE.status; else $("status").hidden = true;
+$("stats").innerHTML = (SITE.stats||[]).map(f => `<div><b>${esc(f[0])}</b><span>${esc(f[1])}</span></div>`).join("");
+if (!SITE.stats || !SITE.stats.length) $("stats").remove();
+$("stepList").innerHTML = SITE.process.map(p => `<div class="step"><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join("");
+$("intro").textContent = SITE.intro;
+$("bio").innerHTML = SITE.bio.map(p => `<p>${esc(p)}</p>`).join("");
+$("facts").innerHTML = SITE.facts.map(f => `<div><b>${esc(f[0])}</b><span>${esc(f[1])}</span></div>`).join("");
+if (SITE.photo) $("photo").style.backgroundImage = `url("${SITE.photo}")`; else $("photo").textContent = "Your photo";
+$("creatorList").innerHTML = SITE.creators.map(c => {
+  const av = c.image ? `<div class="av" style="background-image:url('${esc(c.image)}')"></div>` : `<div class="av">${esc(c.name[0])}</div>`;
+  const inner = `${av}<div><b>${esc(c.name)}</b><small>${esc(c.detail)}</small></div>`;
+  if (c.quote) return `<div class="quote"><p>“${esc(c.quote)}”</p><cite>${esc(c.name)}${c.role ? ", " + esc(c.role) : ""}</cite></div>`;
+  return c.link ? `<a class="creator" href="${esc(c.link)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="creator">${inner}</div>`;
+}).join("");
+$("serviceList").innerHTML = SITE.services.map(s => `<div class="service"><h3>${esc(s.title)}</h3><div class="price">${esc(s.price)}</div><p>${esc(s.text)}</p></div>`).join("");
+$("serviceNote").textContent = SITE.serviceNote;
+$("ctaTitle").textContent = SITE.contact.title;
+$("ctaText").textContent = SITE.contact.text;
+$("links").innerHTML = SITE.contact.links.map(l => `<a href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join("");
+$("footer").textContent = "© " + new Date().getFullYear() + " " + SITE.name;
+
+/* ---------- Video players: only one plays at a time ---------- */
+const ytId = u => { const m = String(u).match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : ""); };
+
+// Return a YouTube player back to its thumbnail (this also stops it).
+function resetYouTube(box){
+  const id = box.dataset.yt;
+  box.innerHTML = `<button class="poster" aria-label="Play video"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><span class="badge">YouTube</span>`;
+  box.querySelector(".poster").onclick = () => startYouTube(box);
+}
+// Stop everything except the player that's about to play.
+function stopOthers(except){
+  document.querySelectorAll(".player video").forEach(v => { if (v !== except && !v.paused) v.pause(); });
+  document.querySelectorAll(".player[data-yt]").forEach(b => { if (b !== except && b.querySelector("iframe")) resetYouTube(b); });
+}
+function startYouTube(box){
+  stopOthers(box);
+  box.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${box.dataset.yt}?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="YouTube video" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+}
+
+function buildItem(v){
+  const el = document.createElement("article");
+  el.className = "item"; el.dataset.cat = v.cat;
+  const box = document.createElement("div"); box.className = "player" + (v.vertical ? " v" : "");
+  if (v.type === "youtube"){
+    box.dataset.yt = ytId(v.url); resetYouTube(box);
+  } else {
+    const vid = document.createElement("video");
+    vid.controls = true; vid.playsInline = true; vid.preload = "metadata";
+    if (v.poster) vid.poster = v.poster;
+    vid.src = v.src + "#t=0.1";   // #t shows a first frame on iOS
+    vid.addEventListener("play", () => stopOthers(vid));
+    box.append(vid);
+  }
+  el.append(box);
+  el.insertAdjacentHTML("beforeend", `<h3>${esc(v.title)}</h3><p>${esc(v.desc)}</p>`);
+  return el;
+}
+
+const cats = ["All", ...new Set(SITE.videos.map(v => v.cat))];
+const count = c => c === "All" ? SITE.videos.length : SITE.videos.filter(v => v.cat === c).length;
+const items = SITE.videos.map(buildItem);
+items.forEach(i => $("grid").append(i));
+if (cats.length > 2){
+  $("tabs").innerHTML = cats.map((c,i) => `<button aria-pressed="${i===0}" data-c="${esc(c)}">${esc(c)}<span class="n">${count(c)}</span></button>`).join("");
+  $("tabs").onclick = e => {
+    const b = e.target.closest("button"); if (!b) return;
+    $("tabs").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    stopOthers(null);
+    items.forEach(i => i.hidden = b.dataset.c !== "All" && i.dataset.cat !== b.dataset.c);
+    $("grid").classList.toggle("shorts", b.dataset.c === "Shorts");
+  };
+}
+
+/* ---------- Motion ---------- */
+const prog = $("prog");
+const onScroll = () => { const h = document.documentElement; prog.style.transform = `scaleX(${h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)})`; };
+addEventListener("scroll", onScroll, {passive:true}); onScroll();
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion:reduce)").matches){
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {threshold:.15});
+  items.forEach((i,n) => { i.classList.add("rv"); i.style.setProperty("--d", n % 3); io.observe(i); });
+}
+</script>
+</body>
+</html>
