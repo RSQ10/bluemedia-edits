@@ -259,7 +259,13 @@ $("creatorList").innerHTML = SITE.creators.map(c => {
   if (c.quote) return `<div class="quote"><p>“${esc(c.quote)}”</p><cite>${esc(c.name)}${c.role ? ", " + esc(c.role) : ""}</cite></div>`;
   return c.link ? `<a class="creator" href="${esc(c.link)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="creator">${inner}</div>`;
 }).join("");
-$("serviceList").innerHTML = SITE.services.map(s => `<div class="service"><h3>${esc(s.title)}</h3><div class="price">${esc(s.price)}</div><p>${esc(s.text)}</p></div>`).join("");
+$("serviceList").innerHTML = SITE.services.map(s => `
+  <a class="service" href="https://x.com/bluemediaedits" target="_blank" rel="noopener">
+    <h3>${esc(s.title)}</h3>
+    <div class="price">${esc(s.price)}</div>
+    <p>${esc(s.text)}</p>
+  </a>
+`).join("");
 $("serviceNote").textContent = SITE.serviceNote;
 $("ctaTitle").textContent = SITE.contact.title;
 $("ctaText").textContent = SITE.contact.text;
