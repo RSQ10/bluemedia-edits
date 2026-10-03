@@ -292,7 +292,7 @@ function buildItem(v){
     const vid = document.createElement("video");
     vid.controls = true; vid.playsInline = true; vid.preload = "metadata";
     if (v.poster) vid.poster = v.poster;
-    vid.src = v.src + "#t=0.1";   // #t shows a first frame on iOS
+    vid.src = v.src;   // #t shows a first frame on iOS
     vid.addEventListener("play", () => stopOthers(vid));
     box.append(vid);
   }
